@@ -1,0 +1,69 @@
+1. Buat Database
+create database myshop;
+
+
+2. Membuat Table di Dalam Database
+use myshop;
+create table users(
+id int auto_increment,
+name varchar(255),
+email varchar(255),
+password varchar(255),
+primary key(id)
+);
+
+create table categories(
+id int auto_increment,
+name varchar(255),
+primary key(id)
+);
+
+create table items(
+id int auto_increment,
+name varchar(255),
+description varchar(255),
+price int,
+stock int,
+category_id int,
+primary key(id),
+foreign key(category_id) references categories(id)
+);
+
+
+3. Memasukkan Data pada Table
+INSERT INTO users (name, email, password)
+VALUES ("John Doe", "john@doe.com", "john123");
+INSERT INTO users (name, email, password)
+VALUES ("Jane Doe", "jane@doe.com", "jenita123");
+
+INSERT INTO categories (name)
+VALUES ("gadget");
+INSERT INTO categories (name)
+VALUES ("cloth");
+INSERT INTO categories (name)
+VALUES ("men");
+INSERT INTO categories (name)
+VALUES ("women");
+INSERT INTO categories (name)
+VALUES ("branded");
+
+INSERT INTO items (name, description, price, stock, category_id)
+VALUES ("Sumsang b50", "Hape keren dari merek sumsang", 4000000, 100, 1);
+INSERT INTO items (name, description, price, stock, category_id)
+VALUES ("Uniklooh", "Baju keren dari brand ternama", 500000, 50, 2);
+INSERT INTO items (name, description, price, stock, category_id)
+VALUES ("IMHO Watch", "Jam tangan anak yang jujur banget", 2000000, 10, 1);
+
+
+4. Mengambil Data dari Database
+SELECT id, name, email FROM users;
+
+SELECT * FROM items WHERE price > 1000000;
+
+SELECT * FROM items WHERE name LIKE '%sung%';
+
+SELECT items.*, categories.name AS kategori FROM items JOIN categories ON items.category_id = categories.id;
+
+
+5. Mengubah Data dari Database
+UPDATE items SET price = 2500000 WHERE id = 1;
